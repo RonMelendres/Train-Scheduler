@@ -12,7 +12,7 @@ var firebaseConfig = {
 
   var database = firebase.database();
 
-  $("#add-train-button").on("click", function(event) {
+  $(".add-train-button").on("click", function(event) {
     event.preventDefault();
 
     var trainName = $("#train-name-input").val().trim();
@@ -59,9 +59,10 @@ database.ref().on("child_added", function(childSnapshot) {
     var newRow = $("<tr>").append(
         $("<td>").text(trainName),
         $("<td>").text(trainDest),
-        $("<td>").text(trainFirstTime),
-        $("<td>").text(trainFirst),
         $("<td>").text(trainFreq),
+        $("<td>").text(trainFirst),
+        $("<td>").text(trainFirstTime),
+        
     );
 
     $("#train-table > tbody").append(newRow);
