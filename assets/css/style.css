@@ -1,0 +1,23 @@
+body{
+    background-image: url(../images/bullet-train-1024x640.jpg);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: rgba(7, 82, 7, 0.603);
+    width: 70%;
+    margin: 0px 0px 0px 230px;
+    
+}
+
+.card{
+    width: 70%;
+    margin: 0px 0px 0px 230px;
+}
+
+.card-header {
+    background-color: rgba(7, 82, 7, 0.603);
+}
