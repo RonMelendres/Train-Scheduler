@@ -33,131 +33,101 @@ $(".add-train-button").on("click", function (event) {
     console.log(newTrain.dest);
     console.log(newTrain.freq);
     console.log(newTrain.next);
-    
+
     $("#train-name-input").val("");
     $("#destination-input").val("");
     $("#frequency-input").val("");
     $("#first-train-input").val("");
 
 
-    function trainTimeCalculations() {
+    // function trainTimeCalculations() {
 
-        var frequency = trainFreq;
-        // var frequency = moment($("#frequency-input"));
-        // var frequency = 5;
-    
-        var firstTime = trainNext;
-        // var firstTime = moment($("#first-train-input")).format("HH:mm");
-        // var firstTime = moment(currentTime).format("HH:mm:ss");
-        // var firstTime = "5:30";
-    
-        var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
-        console.log(firstTimeConverted);
-    
-        var currentTime = moment();
-        console.log("Current time: " + moment(currentTime).format("HH:mm:ss"));
-    
-        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-        console.log("Difference in time: " + diffTime);
-    
-        var remainingTime = diffTime % frequency;
-        console.log(remainingTime);
-    
-        var minutesTillTrain = frequency - remainingTime;
-        console.log("Minutes till train: " + minutesTillTrain);
-    
-        var nextTrain = moment().add(minutesTillTrain, "minutes");
-        console.log("Arrival time: " + moment(nextTrain).format("HH:mm"));
-    }
-    trainTimeCalculations();
 
-    database.ref().on("child_added", function (childSnapshot) {
-        console.log(childSnapshot.val());
-    
-        var trainName = childSnapshot.val().name;
-        var trainDest = childSnapshot.val().dest;
-        var trainFreq = childSnapshot.val().freq;
-        var trainNext = childSnapshot.val().next;
-        
-        console.log(trainName);
-        console.log(trainDest);
-        console.log(trainFreq);
-        console.log(trainNext);
-        
-        var trainFirstTime = moment.unix(trainNext).format("HH:mm:ss");
-    
-        var newRow = $("<tr>").append(
-            $("<td>").text(trainName),
-            $("<td>").text(trainDest),
-            $("<td>").text(trainFreq),
-            $("<td>").text(trainNext),
-            $("<td>").text(trainFirstTime),
-    
-        );
-    
-        $("#train-table > tbody").append(newRow);
-    
-    });
+    //     var frequency = trainFreq;
 
+    //     var firstTime = trainNext;
+
+    //     var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+    //     console.log(firstTimeConverted);
+
+    //     var currentTime = moment();
+    //     console.log("Current time: " + moment(currentTime).format("HH:mm:ss"));
+
+    //     var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    //     // console.log("Difference in time: " + diffTime);
+
+    //     var remainingTime = diffTime % frequency;
+    //     console.log(remainingTime);
+
+    //     var minutesTillTrain = frequency - remainingTime;
+    //     console.log("Minutes till train: " + minutesTillTrain);
+
+    //     var nextArrival = moment().add(minutesTillTrain, "minutes");
+    //     console.log("Arrival time: " + moment(nextArrival).format("HH:mm"));
+
+    // }
+
+    // trainTimeCalculations();
 
 });
 
-// trainTimeCalculations();
+database.ref().on("child_added", function (childSnapshot) {
+    console.log(childSnapshot.val());
 
-// function trainTimeCalculations() {
+    // var newTime = {
+    //     nextT: nextArrival,
+    //     till: minutesTillTrain,
+    // };
 
-//     var frequency = trainFreq;
-//     // var frequency = moment($("#frequency-input"));
-//     // var frequency = 5;
+    var trainName = childSnapshot.val().name;
+    var trainDest = childSnapshot.val().dest;
+    var trainFreq = childSnapshot.val().freq;
+    var trainNext = childSnapshot.val().next;
+    // var nextArrival = childSnapshot.val().nextT;
+    // var minutesTillTrain = childSnapshot.val().till;
 
-//     var firstTime = trainNext;
-//     // var firstTime = moment($("#first-train-input")).format("HH:mm");
-//     // var firstTime = moment(currentTime).format("HH:mm:ss");
-//     // var firstTime = "5:30";
+    console.log(trainName);
+    console.log(trainDest);
+    console.log(trainFreq);
+    // console.log(nextArrival);
+    // console.log(minutesTillTrain);
 
-//     var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
-//     console.log(firstTimeConverted);
+    // var trainFirstTime = moment.unix(trainNext).format("HH:mm:ss");
 
-//     var currentTime = moment();
-//     console.log("Current time: " + moment(currentTime).format("HH:mm:ss"));
+    var frequency = trainFreq;
 
-//     var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-//     console.log("Difference in time: " + diffTime);
+    var firstTime = trainNext;
 
-//     var remainingTime = diffTime % frequency;
-//     console.log(remainingTime);
+    var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+    console.log(firstTimeConverted);
 
-//     var minutesTillTrain = frequency - remainingTime;
-//     console.log("Minutes till train: " + minutesTillTrain);
+    var currentTime = moment();
+    console.log("Current time: " + moment(currentTime).format("HH:mm:ss"));
 
-//     var nextTrain = moment().add(minutesTillTrain, "minutes");
-//     console.log("Arrival time: " + moment(nextTrain).format("HH:mm"));
-// }
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    // console.log("Difference in time: " + diffTime);
 
-// database.ref().on("child_added", function (childSnapshot) {
-//     console.log(childSnapshot.val());
+    var remainingTime = diffTime % frequency;
+    console.log(remainingTime);
 
-//     var trainName = childSnapshot.val().name;
-//     var trainDest = childSnapshot.val().dest;
-//     var trainFreq = childSnapshot.val().freq;
-//     var trainNext = childSnapshot.val().next;
-    
-//     console.log(trainName);
-//     console.log(trainDest);
-//     console.log(trainFreq);
-//     console.log(trainNext);
-    
-//     var trainFirstTime = moment.unix(trainNext).format("HH:mm:ss");
+    var minutesTillTrain = frequency - remainingTime;
+    console.log("Minutes till train: " + minutesTillTrain);
 
-//     var newRow = $("<tr>").append(
-//         $("<td>").text(trainName),
-//         $("<td>").text(trainDest),
-//         $("<td>").text(trainFreq),
-//         $("<td>").text(trainNext),
-//         $("<td>").text(trainFirstTime),
+    var nextArrival = moment().add(minutesTillTrain, "HH:mm");
+    console.log("Arrival time: " + moment(nextArrival).format("HH:mm"));
 
-//     );
 
-//     $("#train-table > tbody").append(newRow);
+    var newRow = $("<tr>").append(
+        $("<td>").text(trainName),
+        $("<td>").text(trainDest),
+        $("<td>").text(trainFreq),
+        // $("<td>").text(trainNext),
+        // $("<td>").text(trainFirstTime),
+        $("<td>").text(nextArrival),
+        $("<td>").text(minutesTillTrain),
 
-// });
+    );
+
+    $("#train-table > tbody").append(newRow);
+
+});
